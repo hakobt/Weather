@@ -1,43 +1,22 @@
 package dev.hakob.weather.data.response
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
+@Keep
 data class CurrentWeatherResponse(
 
-        @field:SerializedName("dt")
-        val dt: Int? = null,
+    @field:SerializedName("name")
+    val name: String,
 
-        @field:SerializedName("rain")
-        val rain: Rain? = null,
+    @field:SerializedName("main")
+    val main: Temperature? = null,
 
-        @field:SerializedName("coord")
-        val coord: Coord? = null,
-
-        @field:SerializedName("weather")
-        val weather: List<WeatherItem>? = null,
-
-        @field:SerializedName("name")
-        val name: String,
-
-        @field:SerializedName("main")
-        val main: Temperature? = null,
-
-        @field:SerializedName("clouds")
-        val clouds: Clouds? = null,
-
-        @field:SerializedName("id")
-        val id: Int,
-
-        @field:SerializedName("sys")
-        val sys: Sys? = null,
-
-        @field:SerializedName("base")
-        val base: String? = null,
-
-        @field:SerializedName("wind")
-        val wind: Wind? = null
+    @field:SerializedName("id")
+    val id: Int
 )
 
+@Keep
 data class BulkWeatherResponse(
-        @SerializedName("list") val list: List<CurrentWeatherResponse>
+    @SerializedName("list") val list: List<CurrentWeatherResponse>
 )

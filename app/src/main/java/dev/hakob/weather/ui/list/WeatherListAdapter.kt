@@ -1,12 +1,9 @@
 package dev.hakob.weather.ui.list
 
-import android.graphics.drawable.BitmapDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -45,12 +42,9 @@ class WeatherViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val temperatureView = view.findViewById<TextView>(R.id.temperature)
     private val cityNameView = view.findViewById<TextView>(R.id.cityName)
-    private val background = view.findViewById<ImageView>(R.id.background)
 
     fun bind(userWeatherEntity: UserWeatherEntity) {
         temperatureView.text = userWeatherEntity.temperature.temp?.toCelsius()
         cityNameView.text = userWeatherEntity.cityName
-
-
     }
 }

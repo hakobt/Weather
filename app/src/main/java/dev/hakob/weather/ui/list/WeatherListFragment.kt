@@ -47,7 +47,7 @@ class WeatherListFragment : DaggerFragment() {
     private fun createAddCityDialog(parent: ViewGroup?) {
         val alertDialogBuilder = AlertDialog.Builder(requireContext())
 
-        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.fragment_add_city, parent, false)
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_add_city, parent, false)
         alertDialogBuilder.setView(dialogView)
         val okButton = dialogView.findViewById<Button>(R.id.positiveButton)
         val closeButton = dialogView.findViewById<Button>(R.id.negativeButton)

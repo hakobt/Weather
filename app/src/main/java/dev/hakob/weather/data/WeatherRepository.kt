@@ -1,7 +1,6 @@
 package dev.hakob.weather.data
 
 import android.location.Location
-import android.util.Log
 import androidx.lifecycle.LiveData
 import dev.hakob.weather.api.WeatherApi
 import dev.hakob.weather.data.entity.UserWeatherEntity
@@ -40,7 +39,7 @@ class WeatherRepository @Inject constructor(
             }
 
             val query = ids.toString().removeSuffix("]").removePrefix("[").replace(" ", "")
-            val request = api.getWeatherForCities(query)
+            val request = api.getWeatherForCitiesAsync(query)
             val response = request.await()
 
             response.body()?.list?.forEach(this@WeatherRepository::writeToDb)
@@ -70,21 +69,6 @@ class WeatherRepository @Inject constructor(
         weatherDao.insertWeather(entity)
     }
 
-    fun requestForecast(cityId: Int) = runBlocking {
-        launch(Dispatchers.IO) {
-            val request = api.getForecastWithCityId(cityId)
-            val response = request.await()
-
-            if (!response.isSuccessful) {
-                return@launch
-            }
-
-            Log.d("Bul", "${response.body()}")
-
-            val body = response.body() ?: return@launch
-        }
-    }
-
     fun tryAddCity(name: String) {
         requestWeather(name)
     }
@@ -95,13 +79,9 @@ class WeatherRepository @Inject constructor(
         }
     }
 
-    fun addYerevanAsCity() {
-
-    }
-
     fun addCityWithLocation(location: Location) = runBlocking {
         launch(Dispatchers.IO) {
-            val request = api.getWeatherWithLatLng(location.latitude, location.longitude)
+            val request = api.getWeatherWithLatLngAsync(location.latitude, location.longitude)
 
             val response = request.await()
 

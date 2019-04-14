@@ -5,6 +5,13 @@
       <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
     </configurations>
   </component>
+  <component name="EntryPointsManager">
+    <list size="3">
+      <item index="0" class="java.lang.String" itemvalue="dagger.android.ContributesAndroidInjector" />
+      <item index="1" class="java.lang.String" itemvalue="dagger.android.ContributesAndroidInjector" />
+      <item index="2" class="java.lang.String" itemvalue="dev.hakob.weather.di.ViewModelKey" />
+    </list>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

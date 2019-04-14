@@ -1,7 +1,9 @@
 package dev.hakob.weather.data.response
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
+@Keep
 data class Temperature(
 
 	@field:SerializedName("temp")
