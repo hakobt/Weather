@@ -18,8 +18,10 @@ class LocationManager @Inject constructor(private val context: Context) {
     @SuppressLint("MissingPermission")
     fun requestLocationUpdates(callback: (Location) -> Unit) {
         val locationProvider = LocationServices.getFusedLocationProviderClient(context)
-        locationProvider.lastLocation.addOnSuccessListener {
-            callback(it)
+        locationProvider.lastLocation.addOnSuccessListener { location: Location? ->
+            location?.let {
+                callback(it)
+            }
         }
     }
 }
