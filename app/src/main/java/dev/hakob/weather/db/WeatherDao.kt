@@ -1,7 +1,10 @@
 package dev.hakob.weather.db
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import dev.hakob.weather.data.entity.UserWeatherEntity
 
 /**
@@ -23,9 +26,6 @@ interface WeatherDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertWeather(userWeatherEntity: UserWeatherEntity)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAllWeather(userWeatherEntities: Collection<UserWeatherEntity>)
 
     @Query("DELETE FROM user_weather WHERE cityId = :cityId")
     fun deleteCityWithId(cityId: Int)

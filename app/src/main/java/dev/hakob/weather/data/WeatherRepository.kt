@@ -1,6 +1,7 @@
 package dev.hakob.weather.data
 
 import android.location.Location
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import dev.hakob.weather.api.WeatherApi
 import dev.hakob.weather.data.entity.UserWeatherEntity
@@ -25,11 +26,15 @@ class WeatherRepository @Inject constructor(
 ) {
 
     init {
+        // refresh all user added city weathers
         refreshAllStoredCityWeathers()
     }
 
     val weatherList = weatherDao.getAllCitiesWithWeather()
 
+    /**
+     * Gets all the city ids from database and refreshes to get the latest info.
+     */
     private fun refreshAllStoredCityWeathers() = runBlocking {
         launch(Dispatchers.IO) {
             val ids = weatherDao.getAllCityIds()
@@ -46,7 +51,10 @@ class WeatherRepository @Inject constructor(
         }
     }
 
-    private fun requestWeather(name: String) = runBlocking {
+    /**
+     * requests the weather by city name and stores into db.
+     */
+    fun requestWeather(name: String) = runBlocking {
         launch(Dispatchers.IO) {
             val request = api.getWeatherWithCityNameAsync(name)
             val response = request.await()
@@ -60,6 +68,10 @@ class WeatherRepository @Inject constructor(
         }
     }
 
+    /**
+     * Stores the api response to database
+     */
+    @WorkerThread
     private fun writeToDb(weatherResponse: CurrentWeatherResponse) {
         val entity = UserWeatherEntity(
             weatherResponse.id,
@@ -69,16 +81,18 @@ class WeatherRepository @Inject constructor(
         weatherDao.insertWeather(entity)
     }
 
-    fun tryAddCity(name: String) {
-        requestWeather(name)
-    }
-
+    /**
+     * Deletes the city from database.
+     */
     fun deleteCityWithId(cityId: Int) = runBlocking {
         launch(Dispatchers.IO) {
             weatherDao.deleteCityWithId(cityId)
         }
     }
 
+    /**
+     * Adds the city to watch list from user's location.
+     */
     fun addCityWithLocation(location: Location) = runBlocking {
         launch(Dispatchers.IO) {
             val request = api.getWeatherWithLatLngAsync(location.latitude, location.longitude)
@@ -89,6 +103,9 @@ class WeatherRepository @Inject constructor(
         }
     }
 
+    /**
+     * Gets the city with id from database.
+     */
     fun getWeatherWithId(cityId: Int): LiveData<UserWeatherEntity> {
         return weatherDao.getWeatherForCityWithId(cityId)
     }

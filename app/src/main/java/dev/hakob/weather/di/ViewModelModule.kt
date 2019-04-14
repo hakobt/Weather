@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import dev.hakob.weather.ui.detail.WeatherForecastViewModel
+import dev.hakob.weather.ui.detail.CityWeatherDetailViewModel
 import dev.hakob.weather.ui.list.WeatherListViewModel
 
 
@@ -22,8 +22,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(WeatherForecastViewModel::class)
-    abstract fun bindWeatherDetail(weatherForecastViewModel: WeatherForecastViewModel): ViewModel
+    @ViewModelKey(CityWeatherDetailViewModel::class)
+    abstract fun bindWeatherDetail(cityWeatherDetailViewModel: CityWeatherDetailViewModel): ViewModel
 
     @Binds
     @IntoMap

@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/weatherForecastFragment"
-        android:name="dev.hakob.weather.ui.detail.WeatherForecastFragment"
+        android:name="dev.hakob.weather.ui.detail.CityWeatherDetailFragment"
         android:label="WeatherForecastFragment">
         <argument
             android:name="cityId"

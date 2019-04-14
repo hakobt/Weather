@@ -11,7 +11,7 @@ import javax.inject.Inject
  * Package dev.hakob.weather.ui
  */
 
-class WeatherForecastViewModel @Inject constructor(
+class CityWeatherDetailViewModel @Inject constructor(
         private val repo: WeatherRepository
 ) : ViewModel() {
 

@@ -18,7 +18,7 @@ class WeatherListViewModel @Inject constructor(
     val weatherList = repo.weatherList
 
     fun addCity(name: String) {
-        repo.tryAddCity(name)
+        repo.requestWeather(name)
     }
 
     fun deleteCity(cityId: Int?): Boolean {

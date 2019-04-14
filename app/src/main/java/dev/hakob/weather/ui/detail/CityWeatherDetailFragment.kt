@@ -19,14 +19,14 @@ import javax.inject.Inject
  * Package dev.hakob.weather.ui.detail
  */
 
-class WeatherForecastFragment: DaggerFragment() {
+class CityWeatherDetailFragment : DaggerFragment() {
 
-    private val args by navArgs<WeatherForecastFragmentArgs>()
+    private val args by navArgs<CityWeatherDetailFragmentArgs>()
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    private lateinit var viewModel: WeatherForecastViewModel
+    private lateinit var viewModelCity: CityWeatherDetailViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_forecast, container, false)
@@ -35,10 +35,10 @@ class WeatherForecastFragment: DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val cityId = args.cityId
-        viewModel = ViewModelProviders.of(this, viewModelFactory)[WeatherForecastViewModel::class.java]
-        viewModel.start(cityId)
+        viewModelCity = ViewModelProviders.of(this, viewModelFactory)[CityWeatherDetailViewModel::class.java]
+        viewModelCity.start(cityId)
 
-        viewModel.currentWeather.observe(this, Observer {
+        viewModelCity.currentWeather.observe(this, Observer {
             cityName.text = it.cityName
             currentTemp.text = it.temperature.temp?.toCelsius()
             minTemp.text = it.temperature.tempMin?.toCelsius()

@@ -37,7 +37,7 @@ class WeatherListFragment : DaggerFragment() {
 
     lateinit var viewModel: WeatherListViewModel
 
-    private val locationRequestCode = 1000
+    private val locationRequestCode = 42
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         createAddCityDialog(container)
@@ -70,7 +70,11 @@ class WeatherListFragment : DaggerFragment() {
 
     override fun onStart() {
         super.onStart()
-        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                requireActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationRequestCode)
         } else {
             viewModel.onLocationPermissionGranted()
@@ -103,7 +107,11 @@ class WeatherListFragment : DaggerFragment() {
 
         listView.adapter = listAdapter
         val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.END) {
-            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
                 return false
             }
 
