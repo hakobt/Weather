@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_graph"
+            app:startDestination="@+id/weatherListFragment">
+
+    <fragment
+            android:id="@+id/weatherListFragment"
+            android:name="dev.hakob.weather.ui.list.WeatherListFragment"
+            android:label="WeatherListFragment">
+        <action
+                android:id="@+id/action_open_forecast"
+                app:destination="@id/weatherForecastFragment"/>
+        <action android:id="@+id/action_add_city" app:destination="@id/addCityFragment"/>
+    </fragment>
+    <fragment
+            android:id="@+id/weatherForecastFragment"
+            android:name="dev.hakob.weather.ui.detail.WeatherForecastFragment"
+            android:label="WeatherForecastFragment">
+        <argument
+                android:name="cityId"
+                app:argType="integer"/>
+    </fragment>
+    <fragment android:id="@+id/addCityFragment" android:name="dev.hakob.weather.AddCityFragment"
+              android:label="fragment_add_city" tools:layout="@layout/fragment_add_city"/>
+</navigation>
